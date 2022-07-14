@@ -9,7 +9,7 @@ const getAllBooks = async (req, res, next) => {
   }
 
   if (!books) {
-    return res.status(404).json({ message: "No Products Found😓" });
+    return res.status(404).json({ message: "No products found" });
   }
   return res.status(200).json({ books });
 };
@@ -22,12 +22,10 @@ const getById = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-  // If Line here
-  if (!books) {
-    return res.status(404).json({ message: "No Book Found😓" });
+  if (!book) {
+    return res.status(404).json({ message: "No Book found" });
   }
   return res.status(200).json({ book });
-  // To here
 };
 
 const addBook = async (req, res, next) => {
@@ -48,7 +46,7 @@ const addBook = async (req, res, next) => {
   }
 
   if (!book) {
-    return res.status(500).json({ message: "Unable To Add😓" });
+    return res.status(500).json({ message: "Unable To Add" });
   }
   return res.status(201).json({ book });
 };
@@ -68,31 +66,24 @@ const updateBook = async (req, res, next) => {
     });
     book = await book.save();
   } catch (err) {
-    err;
+    console.log(err);
   }
-
-  // If Line here
-
   if (!book) {
-    return res.status(400).json({ message: "Unable To  Update By this ID😓" });
+    return res.status(404).json({ message: "Unable To Update By this ID" });
   }
   return res.status(200).json({ book });
-
-  // To here
 };
 
 const deleteBook = async (req, res, next) => {
   const id = req.params.id;
-  let = book;
+  let book;
   try {
     book = await Book.findByIdAndRemove(id);
   } catch (err) {
     console.log(err);
   }
-
-  // If line Here
   if (!book) {
-    return res.status(400).json({ message: "Unable To  Delete By this ID😓" });
+    return res.status(404).json({ message: "Unable To Delete By this ID" });
   }
   return res.status(200).json({ message: "Product Successfully Deleted" });
 };
