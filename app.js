@@ -3,9 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = require("./routes/book-routes");
 const app = express();
-
+const cors = require("cors");
 // Middlewares
 app.use(express.json());
+app.use(cors());
 app.use("/books", router); // localhost:5000/books
 
 mongoose
